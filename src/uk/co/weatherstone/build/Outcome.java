@@ -4,60 +4,56 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Outcome {
-	private float failureWeight;
-	private float successWeight;
-	private float bonusWeight;
+	private float weight;
 	
 	private Map<String, Integer> outcome;
 	
 	public Outcome() {
-		failureWeight = 0.3f;
-		successWeight = 0.5f;
-		bonusWeight = 0.2f;
+		weight = 0.3f;
 		outcome = new HashMap<String, Integer>();
 	}
 	
-	public Outcome(float failure_weight, float success_weight, float bonus_weight) {
-		this.failureWeight = failure_weight;
-		this.successWeight = success_weight;
-		this.bonusWeight = bonus_weight;
+	public Outcome(float weight, String key, int value) {
+		this.weight = weight;
 		outcome = new HashMap<String, Integer>();
+		outcome.put(key, value);
+	}
+	
+	public Outcome(float weight, Map<String, Integer> outcome) {
+		this.weight = weight;
+		this.outcome = outcome;
 	}
 	
 	public void addOutcome(String attribute, int value) {
 		outcome.put(attribute, value);
 	}
 	
-	public void addAllOutcomes(Map<String, Integer> outcomes) {
-		this.outcome = outcomes;
+	public void addAllOutcome(Map<String, Integer> outcome) {
+		this.outcome = outcome;
 	}
 
-	public float getFailureWeight() {
-		return failureWeight;
+	public float getWeight() {
+		return weight;
 	}
 
-	public void setFailureWeight(float failure_weight) {
-		this.failureWeight = failure_weight;
-	}
-
-	public float getSuccessWeight() {
-		return successWeight;
-	}
-
-	public void setSuccessWeight(float success_weight) {
-		this.successWeight = success_weight;
-	}
-
-	public float getBonusWeight() {
-		return bonusWeight;
-	}
-
-	public void setBonusWeight(float bonus_weight) {
-		this.bonusWeight = bonus_weight;
+	public void setWeight(float failure_weight) {
+		this.weight = failure_weight;
 	}
 
 	public Map<String, Integer> getOutcome() {
 		return outcome;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		String prefix = "";
+		for (Map.Entry<String, Integer> entry : outcome.entrySet()) {
+			sb.append(prefix);
+			prefix = ", ";
+			sb.append(entry.getValue().toString() + " " + entry.getKey());
+		}
+		return sb.toString();
 	}
 
 }

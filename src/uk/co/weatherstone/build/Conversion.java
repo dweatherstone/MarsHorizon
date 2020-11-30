@@ -5,30 +5,23 @@ import java.util.Map;
 
 public class Conversion {
 	private Map<String, Integer> input;
-	private Map<String, Integer> success;
-	private Map<String, Integer> failure;
-	private Map<String, Integer> bonus;
+	private Outcome success;
+	private Outcome failure;
+	private Outcome bonus;
 	private Map<String, Integer> resist;
 	
 	public Conversion() {
 		input = new HashMap<String, Integer>();
-		success = new HashMap<String, Integer>();
-		failure = new HashMap<String, Integer>();
-		bonus = new HashMap<String, Integer>();
+		success = new Outcome();
+		failure = new Outcome();
+		bonus = new Outcome();
 		resist = new HashMap<String, Integer>();
 	}
 	
-	public void addConversion(Map<String, Integer> input, Map<String, Integer> success, Map<String, Integer> failure, Map<String, Integer> bonus, Map<String, Integer> resist) {
+	public void addConversion(Map<String, Integer> input, Map<String, Integer> success, float success_weight) {
 		this.input = input;
-		this.success = success;
-		this.failure = failure;
-		this.bonus = bonus;
-		this.resist = resist;
-	}
-	
-	public void addConversion(Map<String, Integer> input, Map<String, Integer> success) {
-		this.input = input;
-		this.success = success;
+		this.success.addAllOutcome(success);
+		this.success.setWeight(success_weight);
 	}
 	
 	public void addInput(String key, int value) {
@@ -36,26 +29,26 @@ public class Conversion {
 	}
 	
 	public void addSuccess(String key, int value) {
-		success.put(key, value);
+		success.addOutcome(key, value);
 	}
 	
 	public void addFailure(String key, int value) {
-		failure.put(key, value);
+		failure.addOutcome(key, value);
 	}
 	
 	public void addBonus(String key, int value) {
-		bonus.put(key, value);
+		bonus.addOutcome(key, value);
 	}
 	
 	public void addResist(String key, int value) {
-		success.put(key, value);
+		success.addOutcome(key, value);
 	}
 	
 	public void reset() {
 		input = new HashMap<String, Integer>();
-		success = new HashMap<String, Integer>();
-		failure = new HashMap<String, Integer>();
-		bonus = new HashMap<String, Integer>();
+		success = new Outcome();
+		failure = new Outcome();
+		bonus = new Outcome();
 		resist = new HashMap<String, Integer>();
 	}
 
@@ -63,15 +56,15 @@ public class Conversion {
 		return input;
 	}
 
-	public Map<String, Integer> getSuccess() {
+	public Outcome getSuccess() {
 		return success;
 	}
 
-	public Map<String, Integer> getFailure() {
+	public Outcome getFailure() {
 		return failure;
 	}
 
-	public Map<String, Integer> getBonus() {
+	public Outcome getBonus() {
 		return bonus;
 	}
 
@@ -81,7 +74,7 @@ public class Conversion {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder("INPUTS: ");
+		StringBuilder sb = new StringBuilder();
 		String prefix = "";
 		for (Map.Entry<String, Integer> entry : input.entrySet()) {
 			sb.append(prefix);
@@ -90,11 +83,7 @@ public class Conversion {
 		}
 		prefix = "";
 		sb.append(" => ");
-		for (Map.Entry<String, Integer> entry : success.entrySet()) {
-			sb.append(prefix);
-			prefix = ", ";
-			sb.append(entry.getValue().toString() + " " + entry.getKey());
-		}
+		sb.append(success.toString());
 		return sb.toString();
 	}
 	
