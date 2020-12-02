@@ -120,5 +120,14 @@ public class EndOfTurnAction {
 	public void setRandomHeatChange(boolean useRandomHeatChange) {
 		this.useRandomHeatChange = useRandomHeatChange;
 	}
+	
+	public enum Type {
+		MIN_ONLY,
+		MAX_ONLY,
+		MIN_AND_MAX,
+		CHANGE,
+		RETURN_TO_VALUE;
+
+	}
 
 }

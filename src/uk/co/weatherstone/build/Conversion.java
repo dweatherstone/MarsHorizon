@@ -18,10 +18,10 @@ public class Conversion {
 		resist = new HashMap<String, Integer>();
 	}
 	
-	public void addConversion(Map<String, Integer> input, Map<String, Integer> success, float success_weight) {
+	public Conversion (Map<String, Integer> input, Map<String, Integer> success) {
+		this();
 		this.input = input;
 		this.success.addAllOutcome(success);
-		this.success.setWeight(success_weight);
 	}
 	
 	public void addInput(String key, int value) {

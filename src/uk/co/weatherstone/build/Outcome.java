@@ -4,23 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Outcome {
-	private float weight;
-	
 	private Map<String, Integer> outcome;
 	
 	public Outcome() {
-		weight = 0.3f;
 		outcome = new HashMap<String, Integer>();
 	}
 	
-	public Outcome(float weight, String key, int value) {
-		this.weight = weight;
+	public Outcome(String key, int value) {
 		outcome = new HashMap<String, Integer>();
 		outcome.put(key, value);
 	}
 	
-	public Outcome(float weight, Map<String, Integer> outcome) {
-		this.weight = weight;
+	public Outcome(Map<String, Integer> outcome) {
 		this.outcome = outcome;
 	}
 	
@@ -31,15 +26,6 @@ public class Outcome {
 	public void addAllOutcome(Map<String, Integer> outcome) {
 		this.outcome = outcome;
 	}
-
-	public float getWeight() {
-		return weight;
-	}
-
-	public void setWeight(float failure_weight) {
-		this.weight = failure_weight;
-	}
-
 	public Map<String, Integer> getOutcome() {
 		return outcome;
 	}
